@@ -35,3 +35,7 @@
 # Builds
 [Bb]uild/
 Win32/
+
+# clion
+.idea/
+cmake-build-debug/
