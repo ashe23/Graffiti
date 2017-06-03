@@ -1,9 +1,11 @@
 #include <glad\glad.h>
 #include <GLFW\glfw3.h>
+#include "Shader.hpp"
 // Standard Headers
 #include <cstdio>
 #include <cstdlib>
 
+int main(int argc, char * argv[]) {
 	// Load GLFW and Create a Window
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -23,6 +25,14 @@
 	glfwMakeContextCurrent(mWindow);
 	gladLoadGL();
 	fprintf(stderr, "OpenGL %s\n", glGetString(GL_VERSION));
+
+
+	// Loading shaders
+	Shader ourShader;
+	ourShader.attach("../../shaders/main.vert", ShaderType::VERTEX);
+	ourShader.attach("../../shaders/main.frag", ShaderType::FRAGMENT);
+	ourShader.use();
+
 
 	// Rendering Loop
 	while (glfwWindowShouldClose(mWindow) == false) {
