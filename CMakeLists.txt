@@ -36,7 +36,7 @@ include_directories(
 file(GLOB VENDORS_SOURCES vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS include/*.hpp)
 file(GLOB PROJECT_SOURCES src/*.cpp)
-file(GLOB PROJECT_EXAMPLES examples/.cpp)
+file(GLOB PROJECT_EXAMPLES examples/*.cpp)
 file(GLOB PROJECT_SHADERS shaders/*.frag shaders/*.vert)
 
 
