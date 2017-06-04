@@ -90,7 +90,7 @@ GLuint Shader::getProgram() const {
  * Using shader program
  */
 void Shader::use() {
-    this->compile();
+    this->compile();	
     glUseProgram(this->_program);
 }
 

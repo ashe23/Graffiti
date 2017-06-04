@@ -31,6 +31,7 @@ include_directories(
   vendor/glfw/include/
   vendor/glm/
   vendor/stb/
+  vendor/catch/include/
 )
 
 file(GLOB VENDORS_SOURCES vendor/glad/src/glad.c)
