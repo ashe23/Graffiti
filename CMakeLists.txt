@@ -23,7 +23,7 @@ else()
     endif()
 endif()
 
-include_directories(
+include_directories(  
   examples/
   include/
   vendor/assimp/include/                    

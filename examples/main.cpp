@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include "Shader.hpp"
 // Standard Headers
 #include <cstdio>
@@ -29,10 +30,12 @@ int main(int argc, char * argv[]) {
 
 	// Loading shaders
 	Shader ourShader;
-	ourShader.attach("../../shaders/main.vert", ShaderType::VERTEX);
-	ourShader.attach("../../shaders/main.frag", ShaderType::FRAGMENT);
+	ourShader.attach("../shaders/main.vert", ShaderType::VERTEX);
+	ourShader.attach("../shaders/main.frag", ShaderType::FRAGMENT);
 	ourShader.use();
+	
 
+	// Loading models
 
 	// Rendering Loop
 	while (glfwWindowShouldClose(mWindow) == false) {
@@ -46,6 +49,7 @@ int main(int argc, char * argv[]) {
 		// Flip Buffers and Draw
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();
-	}   glfwTerminate();
+	}   
+	glfwTerminate();
 	return EXIT_SUCCESS;
 }
