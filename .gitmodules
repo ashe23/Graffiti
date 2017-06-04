@@ -18,3 +18,9 @@
     path = vendor/glad
     url = https://github.com/Dav1dde/glad.git
     branch = c
+[submodule "Catch"]
+	path = Catch
+	url = https://github.com/philsquared/Catch.git
+[submodule "vendor/catch"]
+	path = vendor/catch
+	url = https://github.com/philsquared/Catch.git
