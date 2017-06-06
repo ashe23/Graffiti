@@ -7,12 +7,9 @@
 // Standard Headers
 #include <cstdio>
 #include <cstdlib>
-#include <fstream>
-#include <string>
-#include <sstream>
 #include <algorithm>
 #include <iterator>
-#include <iostream>
+
 
 int main(int argc, char * argv[]) {
 	// Load GLFW and Create a Window
@@ -41,6 +38,10 @@ int main(int argc, char * argv[]) {
 	ourShader.attach("../shaders/simple_trig.vert", ShaderType::VERTEX);
 	ourShader.attach("../shaders/simple_trig.frag", ShaderType::FRAGMENT);
 	ourShader.use();
+
+	WaveFrontLoader loader;
+	loader.load("../assets/cube.obj");
+	
 
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
