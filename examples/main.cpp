@@ -35,38 +35,38 @@ int main(int argc, char * argv[]) {
 
 	// Loading shaders
 	Shader ourShader;
-	ourShader.attach("../shaders/simple_trig.vert", ShaderType::VERTEX);
-	ourShader.attach("../shaders/simple_trig.frag", ShaderType::FRAGMENT);
+    ourShader.attach("../../shaders/simple_trig.vert", ShaderType::VERTEX);
+    ourShader.attach("../../shaders/simple_trig.frag", ShaderType::FRAGMENT);
 	ourShader.use();
 
 	WaveFrontLoader loader;
-	loader.load("../assets/cube.obj");
-	
+    loader.load("../../assets/cube.obj");
 
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
-	};
 
-	unsigned int VBO, VAO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
+    // float vertices[] = {
+    // 	-0.5f, -0.5f, 0.0f,
+    // 	0.5f, -0.5f, 0.0f,
+    // 	0.0f,  0.5f, 0.0f
+    // };
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    // unsigned int VBO, VAO;
+    // glGenVertexArrays(1, &VAO);
+    // glGenBuffers(1, &VBO);
+    // // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+    // glBindVertexArray(VAO);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // glEnableVertexAttribArray(0);
 
-	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-	glBindVertexArray(0);
+    // // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    // glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+    // // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    // glBindVertexArray(0);
 	
 	ourShader.use();
 	
@@ -80,17 +80,18 @@ int main(int argc, char * argv[]) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// draw our first triangle		
-		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(
+                loader.getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+        glDrawArrays(GL_QUADS, 0, 3);
 		// glBindVertexArray(0); // no need to unbind it every time 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();
-	}   
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	}
+    // glDeleteVertexArrays(1, loader.getVAO());
+    // glDeleteBuffers(1, &VBO);
 	glfwTerminate();
 	return EXIT_SUCCESS;
 }

@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <glm/glm.hpp>
 
 // Shader types
 enum ShaderType {
@@ -32,6 +33,11 @@ public:
     GLuint getProgram() const;
 
     void use();
+
+    void setInt(const std::string &, int) const;
+
+    void setMat4(const std::string &, const glm::mat4 &) const;
+
 };
 
 #endif //OPENGL_STARTER_SHADER_H
