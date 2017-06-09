@@ -3,6 +3,10 @@
 typedef Graffiti::Core GC;
 typedef Graffiti::Util GU;
 typedef Graffiti::Window GW;
+typedef Graffiti::Shader GS;
+typedef Graffiti::ShaderType GSS;
+typedef Graffiti::Mesh GM;
+typedef Graffiti::Vertex GV;
 
 int main() {
     // initializing Graffiti core
@@ -10,11 +14,11 @@ int main() {
     GW window(800, 600, "Test");
     window.setPolygonMode(true);
 
-    Graffiti::Shader ourShader;
-    ourShader.attach(GU::getPath("shaders/simple_trig.vert").c_str(), Graffiti::ShaderType::VERTEX);
-    ourShader.attach(GU::getPath("shaders/simple_trig.frag").c_str(), Graffiti::ShaderType::FRAGMENT);
+    GS ourShader;
+    ourShader.attach(GU::getPath("shaders/simple_trig.vert").c_str(), GSS::VERTEX);
+    ourShader.attach(GU::getPath("shaders/simple_trig.frag").c_str(), GSS::FRAGMENT);
 
-    std::vector<Graffiti::Vertex> vertices;
+    std::vector<GV> vertices;
     vertices.push_back(Graffiti::Vertex{glm::vec3{0.5f, 0.5f, 0.0f}});
     vertices.push_back(Graffiti::Vertex{glm::vec3{0.5f, -0.5f, 0.0f}});
     vertices.push_back(Graffiti::Vertex{glm::vec3{-0.5f, -0.5f, 0.0f}});
@@ -28,7 +32,7 @@ int main() {
     indices.push_back(2);
     indices.push_back(3);
 
-    Graffiti::Mesh mesh;
+    GM mesh;
     mesh.attach(vertices, indices);
 
 
