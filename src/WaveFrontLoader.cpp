@@ -1,22 +1,5 @@
 #include "WaveFrontLoader.hpp"
 
-namespace StringLib {
-	template<typename Out>
-	void split(const std::string &s, char delim, Out result) {
-		std::stringstream ss;
-		ss.str(s);
-		std::string item;
-		while (std::getline(ss, item, delim)) {
-			*(result++) = item;
-		}
-	}
-	std::vector<std::string> split(const std::string &s, char delim) {
-		std::vector<std::string> elems;
-		split(s, delim, std::back_inserter(elems));
-		return elems;
-	}
-}
-
 void WaveFrontLoader::load(const std::string objFilePath)
 {
 	using namespace std;
@@ -31,7 +14,7 @@ void WaveFrontLoader::load(const std::string objFilePath)
 	string line;
 	while (std::getline(file, line)) {
 		istringstream iss(line);
-		tokens = StringLib::split(line, ' ');
+		//tokens = StringLib::split(line, ' ');
 		// if prefix is "v" , then is vertex and we should grab them
 		if (tokens.at(0) == "v") {
 			GLfloat x = ::atof(tokens.at(1).c_str());
