@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 // opengl libs
 #include <glad/glad.h>
@@ -28,21 +30,14 @@
 #include "Shader.hpp"
 #include "Util.hpp"
 #include "Window.hpp"
+#include "Mesh.hpp"
 
 namespace Graffiti {
-	
-	class Core {
-	public:		
-		static void init() {			
-			// loading GLFW
-			glfwInit();
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		}
-	};
+
+    class Core {
+    public:
+        static void init();
+    };
 }
 
 #endif // !GRAFFITI_CORE_HPP

@@ -1,43 +1,41 @@
 #pragma once
-#ifndef OPENGL_STARTER_SHADER_H
-#define OPENGL_STARTER_SHADER_H
+#ifndef GRAFFITI_SHADER_HPP
+#define GRAFFITI_SHADER_HPP
 
-#include <glad/glad.h>
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <glm/glm.hpp>
+#include "Core.hpp"
 
-// Shader types
-enum ShaderType {
-    VERTEX = GL_VERTEX_SHADER,
-    FRAGMENT = GL_FRAGMENT_SHADER
-};
+namespace Graffiti {
+    // Shader types
+    enum ShaderType {
+        VERTEX = GL_VERTEX_SHADER,
+        FRAGMENT = GL_FRAGMENT_SHADER
+    };
 
-/**
- * Shader loading class
- * Usage:
- *      Shader myshader;
- *      myshader.attach(shader_file_path,shaderType)
- *      myshader.use();
- */
-class Shader {
-    GLuint _program;
+    /**
+     * Shader loading class
+     * Usage:
+     *      Shader myshader;
+     *      myshader.attach(shader_file_path,shaderType)
+     *      myshader.use();
+     */
+    class Shader {
+        GLuint _program;
 
-    void compile();
+        void compile();
 
-    std::vector<GLuint> compiled_shaders;
-public:
-    void attach(const char *, ShaderType);
+        std::vector<GLuint> compiled_shaders;
+    public:
+        void attach(const char *, Graffiti::ShaderType);
 
-    GLuint getProgram() const;
+        GLuint getProgram() const;
 
-    void use();
+        void use();
 
-    void setInt(const std::string &, int) const;
+        void setInt(const std::string &, int) const;
 
-    void setMat4(const std::string &, const glm::mat4 &) const;
+        void setMat4(const std::string &, const glm::mat4 &) const;
 
-};
+    };
+}
 
-#endif //OPENGL_STARTER_SHADER_H
+#endif //GRAFFITI_SHADER_HPP

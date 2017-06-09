@@ -10,6 +10,8 @@ namespace Graffiti {
 	public:
 		Window(unsigned int width, unsigned int height, const std::string &title);	
 		GLFWwindow *getWindow();
+
+		void setPolygonMode(bool);
 	};
 }
 
