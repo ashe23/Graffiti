@@ -2,6 +2,7 @@
 #ifndef OPENGL_STARTER_CAMERA_HPP
 #define OPENGL_STARTER_CAMERA_HPP
 
+#include <glad/glad.h>
 // Std. Includes
 #include <vector>
 

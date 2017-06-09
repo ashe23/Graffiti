@@ -17,6 +17,3 @@
 [submodule "vendor/catch"]
 	path = vendor/catch
 	url = https://github.com/philsquared/Catch.git
-[submodule "vendor/apathy"]
-	path = vendor/apathy
-	url = https://github.com/dlecocq/apathy.git
