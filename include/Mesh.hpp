@@ -8,7 +8,7 @@ namespace Graffiti {
         // position
         glm::vec3 Position;
         // texCoords
-        glm::vec2 TexCoords;
+        glm::vec2 TexCoords;		
     };
 
     class Mesh {

@@ -20,3 +20,6 @@
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
 	url = https://github.com/wjakob/filesystem.git
+[submodule "vendor/assimp"]
+	url = https://github.com/assimp/assimp.git
+	path = vendor/assimp

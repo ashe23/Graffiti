@@ -24,9 +24,9 @@ namespace Graffiti {
      * @param shaderPath
      * @param type
      */
-    void Shader::attach(const char *shaderPath, ShaderType type) {
-        // 1) Reading file content
-        std::ifstream file(shaderPath);
+    void Shader::attach(const std::string &shaderPath, ShaderType type) {
+        // 1) Reading file content		
+        std::ifstream file(Graffiti::Util::getPath(shaderPath));
         if (!file.is_open()) {
             std::cerr << "Failed to open file!\n";
         }
@@ -95,10 +95,28 @@ namespace Graffiti {
         glUseProgram(this->_program);
     }
 
+	/* Set current active shader program uniform int value */
     void Shader::setInt(const std::string &name, int value) const {
         glUniform1i(glGetUniformLocation(this->_program, name.c_str()), value);
     }
 
+	/* Set current active shader program uniform bool value */
+	void Shader::setBool(const std::string &name, bool value) const
+	{
+		glUniform1i(glGetUniformLocation(this->_program, name.c_str()), (int)value);
+	}
+
+	/* Set current active shader program uniform float value */
+	void Shader::setFloat(const std::string &name, float value) const
+	{
+		glUniform1f(glGetUniformLocation(this->_program, name.c_str()), value);
+	}
+
+	void Shader::setUniform3f(const std::string &name, const glm::vec3 &vec) const {
+		glUniform3f(glGetUniformLocation(this->_program, name.c_str()), vec.r, vec.g, vec.b);
+	}
+
+	/* Set current active shader program uniform mat4 value */
     void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
         glUniformMatrix4fv(glGetUniformLocation(this->_program, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
