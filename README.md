@@ -2,8 +2,8 @@
 Simple opengl boilerplate with all needed dependecies.
 
 ### Installation Linux
-sudo apt install cmake <br>
-sudo apt install xorg-dev
+> sudo apt install cmake <br>
+> sudo apt install xorg-dev
 
 ### Installation Windows
 Just download cmake GUI https://cmake.org/ <br>
