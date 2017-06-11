@@ -31,21 +31,25 @@
 #include <filesystem/resolver.h>
 
 // Graffiti libs
+#include "Window.hpp"
 #include "Shader.hpp"
 #include "Util.hpp"
-#include "Window.hpp"
-#include "Mesh.hpp"
+#include "Model.hpp"
 #include "Texture.hpp"
 #include "Camera.hpp"
+//#include "Mesh.hpp"
+
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 namespace Graffiti {
-	
-	class Core {
-	public:
-		static void init();
-		
-		static void enable3D();
-	};
+
+    class Core {
+    public:
+        static void init();
+
+        static void enable3D();
+    };
 }
 
 #endif // !GRAFFITI_CORE_HPP

@@ -6,8 +6,6 @@
 
 namespace Graffiti {
     class Window {
-        unsigned int majorVersion;
-        unsigned int minorVersion;
         GLFWwindow *window;
     public:
         Window(unsigned int width, unsigned int height, const std::string &title);
@@ -15,8 +13,6 @@ namespace Graffiti {
         GLFWwindow *getWindow();
 
         void setPolygonMode(bool);
-
-	    void setVersion(const unsigned int, const unsigned int);
     };
 }
 
