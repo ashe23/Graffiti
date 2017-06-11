@@ -20,8 +20,14 @@ int main() {
 	ourShader.attach("shaders/simple_trig.vert", GSS::VERTEX);
 	ourShader.attach("shaders/simple_trig.frag", GSS::FRAGMENT);
 
-	GT ourTexture;
-	ourTexture.attach("assets/textures/lava_texture.jpg");
+	GT ourTexture1;
+	ourTexture1.attach("assets/textures/megan.jpg");
+
+	GT ourTexture2;
+	ourTexture2.attach("assets/textures/lava.jpg");
+
+	GT ourTexture3;
+	ourTexture3.attach("assets/textures/noise1.jpg");
 
 	//ObjLoader loader;
 	//loader.load("assets/suzi.obj");
@@ -39,6 +45,10 @@ int main() {
 	GM ourMesh;
 	ourMesh.attach(vertices, indices);
 
+	ourShader.use();
+	ourShader.setInt("ourTexture2", 1);
+	ourShader.setInt("ourTexture3", 2);
+	ourShader.setUniform3f("ourColor", glm::vec3{ 0.8f,0.8f,0.2f });
 
 	// starting game loop
 	while (!glfwWindowShouldClose(window.getWindow())) {
@@ -46,9 +56,14 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		ourShader.use();		
-		ourShader.setUniform3f("ourColor", glm::vec3{ 0.8f,0.8f,0.2f});
-		ourTexture.use();
+		// bind textures on corresponding texture units
+		glActiveTexture(GL_TEXTURE0);
+		ourTexture1.use();
+		glActiveTexture(GL_TEXTURE1);
+		ourTexture2.use();	
+		glActiveTexture(GL_TEXTURE2);
+		ourTexture3.use();
+
 		ourMesh.Draw();
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
