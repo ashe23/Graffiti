@@ -5,7 +5,7 @@ namespace Graffiti {
      * Read texture from given file and generates all needed stuff
      * @param texturePath - path to texture file
      */
-    void Texture::attach(const std::string &texturePath) {
+    void Texture::attach(const std::string &texturePath) {		
         // generate texture
         glGenTextures(1, &this->_textureID);
         glBindTexture(GL_TEXTURE_2D, _textureID);
