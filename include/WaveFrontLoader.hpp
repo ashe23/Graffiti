@@ -12,21 +12,24 @@
 #include <iterator>
 
 
-
 struct Vertex {
-	GLfloat x;
-	GLfloat y;
-	GLfloat z;
+    GLfloat x;
+    GLfloat y;
+    GLfloat z;
 };
 
 class WaveFrontLoader {
 public:
-	void load(const std::string);
-	GLuint getVAO();
+    void load(const std::string);
+
+    GLuint getVAO();
+
 private:
-	GLuint VAO, VBO, EBO;
-	void setupMesh();
-	std::vector<Vertex> vertices;
+    GLuint VAO, VBO, EBO;
+
+    void setupMesh();
+
+    std::vector<Vertex> vertices;
 
 };
 

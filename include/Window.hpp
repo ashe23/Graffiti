@@ -5,14 +5,19 @@
 #include "Core.hpp"
 
 namespace Graffiti {
-	class Window {
-		GLFWwindow *window;
-	public:
-		Window(unsigned int width, unsigned int height, const std::string &title);	
-		GLFWwindow *getWindow();
+    class Window {
+        unsigned int majorVersion;
+        unsigned int minorVersion;
+        GLFWwindow *window;
+    public:
+        Window(unsigned int width, unsigned int height, const std::string &title);
 
-		void setPolygonMode(bool);
-	};
+        GLFWwindow *getWindow();
+
+        void setPolygonMode(bool);
+
+	    void setVersion(const unsigned int, const unsigned int);
+    };
 }
 
 #endif // !GRAFFITI_WINDOW_HPP

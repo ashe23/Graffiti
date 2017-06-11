@@ -2,6 +2,11 @@
 #ifndef GRAFFITI_CORE_HPP
 #define GRAFFITI_CORE_HPP
 
+// assimp
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
+
 // stb image lib
 #include "stb_image.h"
 
@@ -10,7 +15,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <sstream>
+#include <map>
 
 // opengl libs
 #include <glad/glad.h>
@@ -31,14 +36,16 @@
 #include "Window.hpp"
 #include "Mesh.hpp"
 #include "Texture.hpp"
+#include "Camera.hpp"
 
 namespace Graffiti {
-
-    class Core {
-    public:
-        static void init();
+	
+	class Core {
+	public:
+		static void init();
+		
 		static void enable3D();
-    };
+	};
 }
 
 #endif // !GRAFFITI_CORE_HPP
