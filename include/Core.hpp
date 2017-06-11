@@ -12,8 +12,6 @@
 #include <fstream>
 #include <sstream>
 
-
-
 // opengl libs
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -39,6 +37,7 @@ namespace Graffiti {
     class Core {
     public:
         static void init();
+		static void enable3D();
     };
 }
 

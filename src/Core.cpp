@@ -10,4 +10,7 @@ namespace Graffiti {
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     }
+	void Core::enable3D() {
+		glEnable(GL_DEPTH_TEST);
+	}
 }

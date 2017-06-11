@@ -26,8 +26,6 @@ int main() {
 	GT ourTexture2;
 	ourTexture2.attach("assets/textures/lava.jpg");
 
-	GT ourTexture3;
-	ourTexture3.attach("assets/textures/noise1.jpg");
 
 	//ObjLoader loader;
 	//loader.load("assets/suzi.obj");
@@ -47,22 +45,35 @@ int main() {
 
 	ourShader.use();
 	ourShader.setInt("ourTexture2", 1);
-	ourShader.setInt("ourTexture3", 2);
 	ourShader.setUniform3f("ourColor", glm::vec3{ 0.8f,0.8f,0.2f });
 
 	// starting game loop
 	while (!glfwWindowShouldClose(window.getWindow())) {
 		// render
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.0f, 0.521f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		// create transformations
+		glm::mat4 model;
+		glm::mat4 view;
+		glm::mat4 projection;
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		projection = glm::perspective(glm::radians(45.0f), 1.33f, 0.1f, 100.0f);
+		// retrieve the matrix uniform locations
+		unsigned int modelLoc = glGetUniformLocation(ourShader.getProgram(), "model");
+		unsigned int viewLoc = glGetUniformLocation(ourShader.getProgram(), "view");
+		// pass them to the shaders (3 different ways)
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+		// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+		ourShader.setMat4("projection", projection);
 
 		// bind textures on corresponding texture units
 		glActiveTexture(GL_TEXTURE0);
 		ourTexture1.use();
 		glActiveTexture(GL_TEXTURE1);
-		ourTexture2.use();	
-		glActiveTexture(GL_TEXTURE2);
-		ourTexture3.use();
+		ourTexture2.use();
 
 		ourMesh.Draw();
 
