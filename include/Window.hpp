@@ -6,13 +6,12 @@
 
 namespace Graffiti {
     class Window {
-        GLFWwindow *window;
-    public:
+        GLFWwindow *window;		
+    public:		
         Window(unsigned int width, unsigned int height, const std::string &title);
-
         GLFWwindow *getWindow();
-
-        void setPolygonMode(bool);
+        void setPolygonMode(bool);	
+		void readUserInput();
     };
 }
 

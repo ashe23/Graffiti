@@ -44,12 +44,19 @@ const unsigned int SCR_HEIGHT = 600;
 
 namespace Graffiti {
 
-    class Core {
-    public:
-        static void init();
+	class Core {
+	public:
+		// timing
+		float deltaTime = 0.0f;	// time between current frame and last frame
+		float lastFrame = 0.0f;
 
-        static void enable3D();
-    };
+		// Ticks every second 
+		void init();
+		// Updates times 
+		void update();
+		// Activates depth and going to 3D
+		void enable3D();
+	};
 }
 
 #endif // !GRAFFITI_CORE_HPP
