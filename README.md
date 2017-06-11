@@ -9,9 +9,9 @@ Simple opengl boilerplate with all needed dependecies.
 Just download cmake GUI https://cmake.org/ <br>
 Specify destination and build folder and generate for compiler that you need.
 ### Building
-> mkdir build && cd build
-> cmake ..
-> make
+> mkdir build && cd build <br>
+> cmake .. <br>
+> make <br>
 
 ### Executing
 From build folder <br>
