@@ -1,6 +1,7 @@
 # Graffiti
 Simple opengl boilerplate with all needed dependecies.
-
+### Cloning
+> git clone https://github.com/ashe23/Graffiti.git --recursive
 ### Installation Linux
 > sudo apt install cmake <br>
 > sudo apt install xorg-dev
