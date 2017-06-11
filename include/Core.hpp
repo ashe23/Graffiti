@@ -2,6 +2,9 @@
 #ifndef GRAFFITI_CORE_HPP
 #define GRAFFITI_CORE_HPP
 
+// stb image lib
+#include "stb_image.h"
+
 // core libs
 #include <iostream>
 #include <string>
@@ -9,13 +12,11 @@
 #include <fstream>
 #include <sstream>
 
+
+
 // opengl libs
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-// stb image lib
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <stb_image.h>
 
 // glm
 #include <glm/glm.hpp>
@@ -31,6 +32,7 @@
 #include "Util.hpp"
 #include "Window.hpp"
 #include "Mesh.hpp"
+#include "Texture.hpp"
 
 namespace Graffiti {
 
