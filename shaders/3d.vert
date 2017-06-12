@@ -4,12 +4,11 @@ layout (location = 1) in vec2 aTexCoord;
 
 out vec2 TexCoord;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+// model view projection ! order matters (projection * view * model)
+uniform mat4 pvm;
 
 void main()
 {
-	gl_Position = projection * view * model * vec4(aPos, 1.0f);
+	gl_Position = pvm * vec4(aPos, 1.0f);
 	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 }

@@ -17,7 +17,7 @@
 #include <fstream>
 #include <map>
 
-// opengl libs
+// glad and glfw
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -26,11 +26,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-// filesystem libs
+// filesystem 
 #include <filesystem/path.h>
 #include <filesystem/resolver.h>
 
-// Graffiti libs
+// Graffiti
 #include "Window.hpp"
 #include "Shader.hpp"
 #include "Util.hpp"
