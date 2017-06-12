@@ -17,7 +17,7 @@
 #include <fstream>
 #include <map>
 
-// opengl libs
+// glad and glfw
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -26,25 +26,36 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-// filesystem libs
+// filesystem 
 #include <filesystem/path.h>
 #include <filesystem/resolver.h>
 
-// Graffiti libs
+// Graffiti
+#include "Window.hpp"
 #include "Shader.hpp"
 #include "Util.hpp"
-#include "Window.hpp"
-#include "Mesh.hpp"
+#include "Model.hpp"
 #include "Texture.hpp"
 #include "Camera.hpp"
+//#include "Mesh.hpp"
+
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 namespace Graffiti {
-	
+
 	class Core {
 	public:
-		static void init();
-		
-		static void enable3D();
+		// timing
+		float deltaTime = 0.0f;	// time between current frame and last frame
+		float lastFrame = 0.0f;
+
+		// Ticks every second 
+		void init();
+		// Updates times 
+		void update();
+		// Activates depth and going to 3D
+		void enable3D();
 	};
 }
 

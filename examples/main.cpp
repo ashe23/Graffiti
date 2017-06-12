@@ -35,8 +35,8 @@ int main(int argc, char * argv[]) {
 
 	// Loading shaders
 	Shader ourShader;
-    ourShader.attach("../shaders/simple_trig.vert", ShaderType::VERTEX);
-    ourShader.attach("../shaders/simple_trig.frag", ShaderType::FRAGMENT);
+    ourShader.attach("shaders/simple_trig.vert", ShaderType::VERTEX);
+    ourShader.attach("shaders/simple_trig.frag", ShaderType::FRAGMENT);
 	ourShader.use();
 
 	WaveFrontLoader loader;

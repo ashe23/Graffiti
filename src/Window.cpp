@@ -1,36 +1,45 @@
 #include "Window.hpp"
 
 namespace Graffiti {
-    Window::Window(unsigned int width, unsigned int height, const std::string &title) {
-        // creating window
-        window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-        if (!window) {
-            std::cout << "Failed to create GLFW window" << std::endl;
-            glfwTerminate();
-        }
-        glfwMakeContextCurrent(window);
 
-        // glad: load all OpenGL function pointers
-        if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-            std::cout << "Failed to initialize GLAD" << std::endl;
-            glfwTerminate();
-        }
+	Window::Window(unsigned int width, unsigned int height, const std::string &title, bool fullscreen = false) {
+		// creating window
+		if (fullscreen) {
+			window = glfwCreateWindow(width, height, title.c_str(), glfwGetPrimaryMonitor(), NULL);
+		}
+		else {
+			window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+		}
 
-        std::cout << glGetString(GL_VERSION) << std::endl;
+		if (!window) {
+			std::cout << "Failed to create GLFW window" << std::endl;
+			glfwTerminate();
+		}
+		glfwMakeContextCurrent(window);
 
-    }
+		// glad: load all OpenGL function pointers
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			std::cout << "Failed to initialize GLAD" << std::endl;
+			glfwTerminate();
+		}
 
-    GLFWwindow *Window::getWindow() {
-        return window;
-    }
+		// initialize camera
+		
+		std::cout << glGetString(GL_VERSION) << std::endl;
 
-    /**
-     * Activates Polygon mode
-     * @param mode
-     */
-    void Window::setPolygonMode(bool mode) {
-        if (mode) {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        }
-    }
+	}
+
+	GLFWwindow *Window::getWindow() {
+		return window;
+	}
+
+	/**
+	 * Activates Polygon mode
+	 * @param mode
+	 */
+	void Window::setPolygonMode(bool mode) {
+		if (mode) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+	}	
 }
