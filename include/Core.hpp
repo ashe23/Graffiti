@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 #include <fstream>
 #include <map>
 
@@ -34,10 +35,10 @@
 #include "Window.hpp"
 #include "Shader.hpp"
 #include "Util.hpp"
+#include "Mesh.hpp"
 #include "Model.hpp"
 #include "Texture.hpp"
 #include "Camera.hpp"
-//#include "Mesh.hpp"
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;

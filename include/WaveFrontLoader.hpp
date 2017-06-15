@@ -12,25 +12,5 @@
 #include <iterator>
 
 
-struct Vertex {
-    GLfloat x;
-    GLfloat y;
-    GLfloat z;
-};
-
-class WaveFrontLoader {
-public:
-    void load(const std::string);
-
-    GLuint getVAO();
-
-private:
-    GLuint VAO, VBO, EBO;
-
-    void setupMesh();
-
-    std::vector<Vertex> vertices;
-
-};
 
 #endif // GRAFFITI_WAVE_FRONT_LOADER_H

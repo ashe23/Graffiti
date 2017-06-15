@@ -16,6 +16,7 @@ float pitch = 0.0f;
 float lastX = SCR_WIDTH / 2.0;
 float lastY = SCR_HEIGHT / 2.0;
 float fov = 45.0f;
+float trans = 1.0f;
 
 
 int main() {
@@ -24,7 +25,7 @@ int main() {
 	core.init();
 
 	// create window
-	Graffiti::Window window(SCR_WIDTH, SCR_HEIGHT, "Test", false);
+	Graffiti::Window window(SCR_WIDTH, SCR_HEIGHT, "Magic Cube", false);
 	window.setPolygonMode(false);
 	core.enable3D();
 
@@ -108,8 +109,7 @@ int main() {
 	// activate shader and bind textures to it
 	ourShader.use();
 	ourShader.setInt("texture1", 0);
-	ourShader.setInt("texture2", 1);
-
+	ourShader.setInt("texture2", 1);	
 	
 
 	// game loop
@@ -129,7 +129,8 @@ int main() {
 		ourTexture0.use();
 		glActiveTexture(GL_TEXTURE1);
 		ourTexture1.use();
-
+			
+		ourShader.setFloat("trans", trans);
 
 		// create trasformation
 		glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -137,7 +138,7 @@ int main() {
 		glm::mat4 model;
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));		
 		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 0.3f, 0.5f));		
-		ourShader.setMat4("pvm", projection * view * model);
+		ourShader.setMat4("pvm", projection * view * model);		
 
 		// draw mesh
 		glBindVertexArray(VAO);
@@ -221,6 +222,13 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
+	trans -= yoffset / 10;
+	if (trans < 0.0f) {
+		trans = 0.0f;
+	}
+	if (trans > 1.0f) {
+		trans = 1.0f;
+	}
 	if (fov >= 1.0f && fov <= 45.0f)
 		fov -= yoffset;
 	if (fov <= 1.0f)
