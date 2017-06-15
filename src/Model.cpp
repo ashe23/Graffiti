@@ -86,6 +86,8 @@ namespace Graffiti {
 		std::vector<unsigned int> indices;
 		std::vector<MeshTexture> textures;
 
+		// TODO:Ashe23 should check for coorrent normals,tangents , sometimes Access Violation Error occured when loading model
+
 		// Walk through each of the mesh's vertices
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
