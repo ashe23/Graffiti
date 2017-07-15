@@ -39,7 +39,9 @@ namespace Graffiti {
 		void setFloat(const std::string &, float) const;
 		void setUniform3f(const std::string &, const glm::vec3 &) const;
 		void setMat4(const std::string &, const glm::mat4 &) const;
-		
+		void setVec3(const std::string &, const glm::vec3 &) const;
+		void setVec3(const std::string &, float , float , float ) const;
+
 		
 	};
 }
