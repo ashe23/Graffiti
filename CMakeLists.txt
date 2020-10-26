@@ -20,15 +20,28 @@ endif(MSVC)
 
 include_directories(
 	include/
+	include/util
+	include/core
 	vendor/glfw/include/
 	vendor/glad/include/
+	shaders/
 )
 
 # pathes
-file(GLOB SOURCES "src/*.cpp")
-file(GLOB HEADERS "include/*.h")
+file(GLOB SOURCES "src/*.cpp" "src/core/*.cpp")
+file(GLOB HEADERS "include/*.h" "include/util/*.h" "include/core/*.h")
+file(GLOB SHADERS "shaders/*.vs shaders/*.fs")
 file(GLOB VENDOR_GLAD_SOURCES "vendor/glad/src/glad.c")
 
 
-add_executable(Graffiti ${SOURCES} ${HEADERS} ${VENDOR_GLAD_SOURCES})
-target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+add_executable(Graffiti
+	${SOURCES} 
+	${HEADERS} 
+	${SHADERS} 
+	${VENDOR_GLAD_SOURCES}
+)
+target_link_libraries(${PROJECT_NAME} 
+	glfw 
+	${GLFW_LIBRARIES} 
+	${GLAD_LIBRARIES}
+)

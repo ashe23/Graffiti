@@ -39,3 +39,6 @@ Win32/
 # clion
 .idea/
 cmake-build-debug/
+
+# visual studio
+.vs/
