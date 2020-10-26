@@ -1,5 +1,7 @@
 #include "Core_Minimal.h"
 #include "Shader.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -54,6 +56,12 @@ int main()
 		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
 		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
 
+	};
+
+	float texCoords[] = {
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		0.5f, 1.0f
 	};
 
 
