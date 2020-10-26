@@ -25,6 +25,7 @@ include_directories(
 	vendor/glfw/include/
 	vendor/glad/include/
 	vendor/stb/
+	vendor/glm
 	shaders/
 )
 
