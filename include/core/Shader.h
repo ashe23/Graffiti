@@ -23,6 +23,7 @@ public:
 	Shader(const char* VertexShaderPath, const char* FragmentShaderPath);
 	~Shader();
 	void Use();
+	unsigned int GetID() const;
 	void SetBool(const std::string& Name, bool Value) const;
 	void SetInt(const std::string& Name, int Value) const;
 	void SetFloat(const std::string& Name, float Value) const;

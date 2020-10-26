@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <filesystem>
 
 namespace Graf
 {
@@ -14,6 +15,12 @@ namespace Graf
 			std::string content((std::istreambuf_iterator<char>(ifs)),
 				(std::istreambuf_iterator<char>()));
 			return content;
+		}
+
+		static std::string GetEngineDir()
+		{
+			namespace fs = std::filesystem;
+			return fs::current_path().parent_path().u8string() + "/";
 		}
 	}
 }

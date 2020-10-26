@@ -2,7 +2,6 @@
 #include "Util.h"
 #include "Shader.h"
 #include <iostream>
-#include <filesystem>
 
 
 Shader::Shader(const char * VertShaderPath, const char * FragShaderPath)
@@ -21,6 +20,11 @@ Shader::~Shader()
 void Shader::Use()
 {
 	glUseProgram(ID);
+}
+
+unsigned int Shader::GetID() const
+{
+	return ID;
 }
 
 void Shader::SetBool(const std::string & Name, bool Value) const
@@ -70,12 +74,10 @@ void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
 void Shader::Compile()
 {
 	// read shader files content
-	// todo:ashe23 this should be in different agnostic class
-	namespace fs = std::filesystem;
-	std::filesystem::path path = fs::current_path();
-	auto EngineDir = path.parent_path().u8string();
-	auto VertexShaderFile = EngineDir + "/" + VertexShaderPath;
-	auto FragmentShaderFile = EngineDir + "/" + FragmentShaderPath;
+	auto EngineDir = Graf::Util::GetEngineDir();
+	
+	auto VertexShaderFile = EngineDir + VertexShaderPath;
+	auto FragmentShaderFile = EngineDir + FragmentShaderPath;
 	bool isFile = std::filesystem::is_regular_file(EngineDir + VertexShaderPath);
 
 	auto VertexShaderCode = Graf::Util::ReadFileContent(VertexShaderFile);
