@@ -1,33 +1,12 @@
 #include "Core_Minimal.h"
 #include "Shader.h"
 
-#include <iostream>
-#include <filesystem>
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-const char *vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"layout (location = 1) in vec3 aColor;\n"
-"out vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos * -1.0, 1.0);\n"
-"   ourColor = aColor;\n"
-"}\0";
-
-const char *fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"in vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"   FragColor = vec4(ourColor, 1.0f);\n"
-"}\n\0";
 
 int main()
 {			
@@ -64,6 +43,8 @@ int main()
 
 	// this should always call after glad loaded
 	Shader TestShader{ "shaders/test.vs", "shaders/test.fs" };
+	float offset = 0.4f;
+	
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------

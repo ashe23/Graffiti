@@ -10,7 +10,6 @@ Shader::Shader(const char * VertShaderPath, const char * FragShaderPath)
 	VertexShaderPath = VertShaderPath;
 	FragmentShaderPath = FragShaderPath;
 
-	// todo:ashe23 this should be in different agnostic class
 	this->Compile();
 }
 
@@ -71,6 +70,7 @@ void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
 void Shader::Compile()
 {
 	// read shader files content
+	// todo:ashe23 this should be in different agnostic class
 	namespace fs = std::filesystem;
 	std::filesystem::path path = fs::current_path();
 	auto EngineDir = path.parent_path().u8string();
