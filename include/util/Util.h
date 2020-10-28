@@ -5,7 +5,7 @@
 #include <iostream>
 #include <filesystem>
 
-namespace Graf
+namespace Graffiti
 {
 	namespace Util
 	{

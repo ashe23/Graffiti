@@ -1,9 +1,10 @@
 #include <string>
 
 #include "Shader.h"
-#include <Util.h>
 #include "FileManager.h"
+#include "Util.h"
 
+#include "spdlog/spdlog.h"
 #include <glm/gtc/type_ptr.hpp>
 
 
@@ -71,11 +72,11 @@ void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
 
 		if (Type == ShaderCompilationType::Program)
 		{
-			std::cerr << "Error in shader program:" << InfoLog << std::endl;
+			spdlog::error("Error in shader program {0}", InfoLog);
 		}
 		else
 		{
-			std::cerr << "Error while compiling shader:" << InfoLog << std::endl;
+			spdlog::error("Error while compiling shader {0}", InfoLog);
 		}
 	}
 }
@@ -83,14 +84,13 @@ void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
 void Shader::Compile()
 {
 	// read shader files content
-	auto EngineDir = Graffiti::FileManager::GetRootDir();
+	auto ShadersDir = Graffiti::FileManager::GetShadersDir();
 	
-	auto VertexShaderFile = EngineDir + VertexShaderPath;
-	auto FragmentShaderFile = EngineDir + FragmentShaderPath;
-	bool isFile = std::filesystem::is_regular_file(EngineDir + VertexShaderPath);
+	auto VertexShaderFile = ShadersDir + VertexShaderPath;
+	auto FragmentShaderFile = ShadersDir + FragmentShaderPath;
 
-	auto VertexShaderCode = Graf::Util::ReadFileContent(VertexShaderFile);
-	auto FragmentShaderCode = Graf::Util::ReadFileContent(FragmentShaderFile);
+	auto VertexShaderCode = Graffiti::Util::ReadFileContent(VertexShaderFile);
+	auto FragmentShaderCode = Graffiti::Util::ReadFileContent(FragmentShaderFile);
 	const char* vsc = VertexShaderCode.c_str();
 	const char* fsc = FragmentShaderCode.c_str();
 	// Creating shader objects

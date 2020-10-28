@@ -25,6 +25,7 @@ public:
 	void Init();
 	void Exit();
 	bool InitializedSuccessFully() const;
+	void ClearBuffer();
 	GLFWwindow* GetWindow() const;
 private:
 	GLFWwindow* Window;

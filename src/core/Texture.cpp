@@ -1,10 +1,11 @@
 #include "Texture.h"
-#include "Util.h"
 #include "FileManager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <glad/glad.h>
+
+#include <spdlog/spdlog.h>
 
 Texture::Texture(const char * TP, bool Alpha)
 {
@@ -19,7 +20,7 @@ unsigned char * Texture::GetTextureData() const
 
 void Texture::Load()
 {
-	auto EngineDir = Graffiti::FileManager::GetRootDir();
+	auto AssetsDir = Graffiti::FileManager::GetAssetsDir();
 
 	glGenTextures(1, &TextureID);
 	glBindTexture(GL_TEXTURE_2D, TextureID); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
@@ -30,7 +31,7 @@ void Texture::Load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	TextureData = stbi_load((EngineDir + TexturePath).c_str(), &width, &height, &ColorChannels, 0);
+	TextureData = stbi_load((AssetsDir + TexturePath).c_str(), &width, &height, &ColorChannels, 0);
 	if (TextureData)
 	{
 		auto ColorMode = WithAlpha ? GL_RGBA : GL_RGB;
@@ -39,8 +40,8 @@ void Texture::Load()
 	}
 	else
 	{
-		std::cout << EngineDir + TexturePath << std::endl;
-		std::cout << "Failed to load texture" << std::endl;
+		spdlog::error("Failed to load texture");
+		spdlog::error("Path: {0}", AssetsDir + TexturePath);
 	}
 	stbi_image_free(TextureData);
 }

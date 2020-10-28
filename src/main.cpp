@@ -1,7 +1,7 @@
-//#include "Core_Minimal.h"
 #include "Core.h"
-
-using namespace std;
+#include "Shader.h"
+#include "TestTriangle.h"
+#include "Texture.h"
 
 int main()
 {		
@@ -14,15 +14,24 @@ int main()
 		return 0;
 	}
 
+
+	Shader TestShader{ "test.vs", "test.fs" };
+	TestTriangle Triangle;
+	Triangle.Init();
+
 	while (!glfwWindowShouldClose(Core.GetWindow()))
 	{
-		glClearColor(0.082f, 0.317f, 0.250f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		Core.ClearBuffer();
+
+		TestShader.Use();
+
+		Triangle.Draw();
 
 		glfwSwapBuffers(Core.GetWindow());
 		glfwPollEvents();
 	}
 
+	Triangle.Clear();
 	Core.Exit();
 	return 0;
 }

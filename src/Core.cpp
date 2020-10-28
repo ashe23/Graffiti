@@ -34,6 +34,12 @@ bool Core::InitializedSuccessFully() const
 	return bInitSuccess;
 }
 
+void Core::ClearBuffer()
+{
+	glClearColor(0.082f, 0.317f, 0.250f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
 bool Core::InitGlad() const
 {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
