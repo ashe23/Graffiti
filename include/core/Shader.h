@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Util.h"
+#include <glm/glm.hpp>
 
 enum class ShaderType
 {
@@ -27,6 +27,7 @@ public:
 	void SetBool(const std::string& Name, bool Value) const;
 	void SetInt(const std::string& Name, int Value) const;
 	void SetFloat(const std::string& Name, float Value) const;
+	void SetMatrix4(const std::string& Name, glm::mat4 Value) const;
 private:
 	unsigned int ID;
 	const char* VertexShaderPath;

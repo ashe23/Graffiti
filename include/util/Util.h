@@ -22,5 +22,10 @@ namespace Graf
 			namespace fs = std::filesystem;
 			return fs::current_path().parent_path().u8string() + "/";
 		}
+
+		static void PrintErrMsg(const char* Msg)
+		{
+			std::cerr << Msg << std::endl;
+		}
 	}
 }

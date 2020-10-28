@@ -1,6 +1,5 @@
 #include "Texture.h"
 #include "Core_Minimal.h"
-#include "stb_image.h"
 
 Texture::Texture(const char * TP, bool Alpha)
 {
@@ -35,6 +34,7 @@ void Texture::Load()
 	}
 	else
 	{
+		std::cout << EngineDir + TexturePath << std::endl;
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(TextureData);
