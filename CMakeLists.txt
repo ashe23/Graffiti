@@ -26,6 +26,7 @@ include_directories(
 	vendor/glad/include/
 	vendor/stb/
 	vendor/glm
+	vendor/spdlog/include
 	shaders/
 )
 

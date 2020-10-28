@@ -1,7 +1,11 @@
-#include "Core_Minimal.h"
-#include "Util.h"
+#include <string>
+
 #include "Shader.h"
-#include <iostream>
+#include <Util.h>
+#include "FileManager.h"
+
+#include <glm/gtc/type_ptr.hpp>
+
 
 
 Shader::Shader(const char * VertShaderPath, const char * FragShaderPath)
@@ -79,7 +83,7 @@ void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
 void Shader::Compile()
 {
 	// read shader files content
-	auto EngineDir = Graf::Util::GetEngineDir();
+	auto EngineDir = Graffiti::FileManager::GetRootDir();
 	
 	auto VertexShaderFile = EngineDir + VertexShaderPath;
 	auto FragmentShaderFile = EngineDir + FragmentShaderPath;

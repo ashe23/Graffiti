@@ -16,16 +16,5 @@ namespace Graf
 				(std::istreambuf_iterator<char>()));
 			return content;
 		}
-
-		static std::string GetEngineDir()
-		{
-			namespace fs = std::filesystem;
-			return fs::current_path().parent_path().u8string() + "/";
-		}
-
-		static void PrintErrMsg(const char* Msg)
-		{
-			std::cerr << Msg << std::endl;
-		}
 	}
 }

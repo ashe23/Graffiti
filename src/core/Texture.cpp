@@ -1,5 +1,10 @@
 #include "Texture.h"
-#include "Core_Minimal.h"
+#include "Util.h"
+#include "FileManager.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#include <glad/glad.h>
 
 Texture::Texture(const char * TP, bool Alpha)
 {
@@ -14,7 +19,7 @@ unsigned char * Texture::GetTextureData() const
 
 void Texture::Load()
 {
-	auto EngineDir = Graf::Util::GetEngineDir();
+	auto EngineDir = Graffiti::FileManager::GetRootDir();
 
 	glGenTextures(1, &TextureID);
 	glBindTexture(GL_TEXTURE_2D, TextureID); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object

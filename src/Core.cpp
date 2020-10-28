@@ -1,7 +1,5 @@
 #include "Core.h"
-#include "Core_Minimal.h"
-#include "Util.h"
-#include <iostream>
+#include "spdlog/spdlog.h"
 
 void Core::Init()
 {
@@ -15,7 +13,7 @@ void Core::Init()
 	Window = glfwCreateWindow(Display::WIDTH, Display::HEIGHT, Config::WINDOW_TITLE, nullptr, nullptr);
 	if (!Window)
 	{
-		Graf::Util::PrintErrMsg("Failed to create GLFW window");
+		spdlog::error("Failed to create GLFW window");
 		glfwTerminate();
 		return;
 	}
@@ -25,42 +23,22 @@ void Core::Init()
 	bInitSuccess = this->InitGlad();
 }
 
-void Core::Loop()
+void Core::Exit()
 {
-	if (!bInitSuccess)
-	{
-		Graf::Util::PrintErrMsg("Core initialization failed!");
-		return;
-	}
-
-
-	while (!glfwWindowShouldClose(Window))
-	{
-		// Handling Inputs
-		Core::OnInputEvent(Window);		
-
-		if (LoopCallbackFunc)
-		{
-			LoopCallbackFunc();
-		}		
-
-		glfwSwapBuffers(Window);
-		glfwPollEvents();
-	}
-
 	glfwTerminate();
 }
 
-void Core::SetLoopCallbackFunc(const TLoopCallbackFunc & fn)
+
+bool Core::InitializedSuccessFully() const
 {
-	LoopCallbackFunc = fn;
+	return bInitSuccess;
 }
 
 bool Core::InitGlad() const
 {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		Graf::Util::PrintErrMsg("Failed to initialize GLAD");
+		spdlog::error("Failed to initialize GLAD");
 		return false;
 	}
 
@@ -72,8 +50,7 @@ void Core::OnWindowResize(GLFWwindow* Window, int Width, int Height)
 	glViewport(0, 0, Width, Height);
 }
 
-void Core::OnInputEvent(GLFWwindow * Window)
+GLFWwindow * Core::GetWindow() const
 {
-	if (glfwGetKey(Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(Window, true);
+	return Window;
 }

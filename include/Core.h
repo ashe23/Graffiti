@@ -1,5 +1,6 @@
 #pragma once
-#include <functional>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Display
 {
@@ -15,22 +16,20 @@ namespace Config
 	static constexpr char* WINDOW_TITLE = "Graffiti 1.0";
 }
 
-typedef std::function<void()> TLoopCallbackFunc;
 struct GLFWwindow;
 
 
 class Core
-{
+{	
 public:	
 	void Init();
-	void Loop();
-	void SetLoopCallbackFunc(const TLoopCallbackFunc& Fn);
+	void Exit();
+	bool InitializedSuccessFully() const;
+	GLFWwindow* GetWindow() const;
 private:
 	GLFWwindow* Window;
 	bool bInitSuccess = false;
-	TLoopCallbackFunc LoopCallbackFunc;
 private:
 	bool InitGlad() const;
 	static void OnWindowResize(GLFWwindow* Window, int Width, int Height);
-	static void OnInputEvent(GLFWwindow* Window);
 };
