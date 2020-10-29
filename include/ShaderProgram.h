@@ -16,9 +16,11 @@ class ShaderProgram
 	bool bIsValid;
 public:
 	ShaderProgram();
+	~ShaderProgram();
 	void Use();
 	void Link();
-	void Attach(Shader& ShaderObj) const;
+	void Attach(const Shader& ShaderObj) const;
+	void Detach(const Shader& ShaderObj) const;
 	bool IsValid() const;
 	void SetBool(const std::string& Name, bool Value) const;
 	void SetInt(const std::string& Name, int Value) const;

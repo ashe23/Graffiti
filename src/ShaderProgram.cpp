@@ -9,6 +9,12 @@ ShaderProgram::ShaderProgram()
 	bIsValid = false;
 }
 
+ShaderProgram::~ShaderProgram()
+{
+	glDeleteProgram(ProgramID);
+	spdlog::info("Shader Program {0} deleted successfully", ProgramID);
+}
+
 void ShaderProgram::Use()
 {
 	if (!bIsValid)
@@ -39,7 +45,7 @@ void ShaderProgram::Link()
 	bIsValid = true;
 }
 
-void ShaderProgram::Attach(Shader & ShaderObj) const
+void ShaderProgram::Attach(const Shader & ShaderObj) const
 {
 	if (!ShaderObj.IsValid())
 	{
@@ -48,6 +54,11 @@ void ShaderProgram::Attach(Shader & ShaderObj) const
 	}
 
 	glAttachShader(ProgramID, ShaderObj.GetID());
+}
+
+void ShaderProgram::Detach(const Shader & ShaderObj) const
+{
+	glDetachShader(ProgramID, ShaderObj.GetID());
 }
 
 bool ShaderProgram::IsValid() const

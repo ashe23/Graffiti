@@ -54,6 +54,8 @@ int main()
 	
 	TestTriangle Triangle1;
 	TestTriangle Triangle2;
+	TestCube Cube;
+	Cube.Init();
 	Triangle1.Init();
 	Triangle2.Init();
 	
@@ -67,11 +69,8 @@ int main()
 	
 		ShaderProg1.Use();
 
-		Triangle1.Draw();
+		Cube.Draw();
 
-		ShaderProg2.Use();
-		ShaderProg2.SetFloat("offset", std::sin(static_cast<float>(glfwGetTime())));
-		Triangle2.Draw();
 
 
 		glfwSwapBuffers(Core.GetWindow());
@@ -80,6 +79,7 @@ int main()
 
 	Triangle1.Clear();
 	Triangle2.Clear();
+	Cube.Clear();
 
 	Core.Exit();
 	return 0;
