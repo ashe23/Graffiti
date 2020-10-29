@@ -64,9 +64,9 @@ void Shader::CheckCompileError()
 	if (!Compiled)
 	{
 		GLsizei LogLength = 0;
-		GLchar Msg[1024];
-		glGetShaderInfoLog(ShaderObjectID, 1024, &LogLength, Msg);
-		spdlog::error("Error while compiling shader {0}", Msg);
+		GLchar ErrorMsg[1024];
+		glGetShaderInfoLog(ShaderObjectID, 1024, &LogLength, ErrorMsg);
+		spdlog::error("Error while compiling shader {0}", ErrorMsg);
 		bIsValid = false;
 		return;
 	}

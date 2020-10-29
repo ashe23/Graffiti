@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Shader.h"
+#include "ShaderProgram.h"
 #include "TestTriangle.h"
 #include "TestCube.h"
 #include "Texture.h"
@@ -38,9 +39,23 @@ int main()
 	// creating first shader
 	Shader shader1{ ShaderType::VERTEX , "test.vs"};	
 	Shader shader2{ ShaderType::FRAGMENT, "test.fs" };
-	//shader1.IsValid();
+	Shader shader3{ ShaderType::VERTEX, "cube.vs" };
+	Shader shader4{ ShaderType::FRAGMENT, "cube.fs" };
+	
+	ShaderProgram ShaderProg1;
+	ShaderProg1.Attach(shader1);
+	ShaderProg1.Attach(shader2);
+	ShaderProg1.Link();
 
-	// Camera MVP
+	ShaderProgram ShaderProg2;
+	ShaderProg2.Attach(shader3);
+	ShaderProg2.Attach(shader4);
+	ShaderProg2.Link();
+	
+	TestTriangle Triangle1;
+	TestTriangle Triangle2;
+	Triangle1.Init();
+	Triangle2.Init();
 	
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -50,11 +65,21 @@ int main()
 		Core.ClearBuffer();
 
 	
+		ShaderProg1.Use();
+
+		Triangle1.Draw();
+
+		ShaderProg2.Use();
+		ShaderProg2.SetFloat("offset", std::sin(static_cast<float>(glfwGetTime())));
+		Triangle2.Draw();
 
 
 		glfwSwapBuffers(Core.GetWindow());
 		glfwPollEvents();
 	}
+
+	Triangle1.Clear();
+	Triangle2.Clear();
 
 	Core.Exit();
 	return 0;
