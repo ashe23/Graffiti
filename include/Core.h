@@ -5,8 +5,8 @@
 namespace Display
 {
 	// todo:ashe23 move this to .config file
-	static constexpr int WIDTH = 1280;
-	static constexpr int HEIGHT = 720;
+	static constexpr int WIDTH = 800;
+	static constexpr int HEIGHT = 600;
 };
 
 namespace Config

@@ -3,6 +3,9 @@
 
 #include "spdlog/spdlog.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 ShaderProgram::ShaderProgram()
 {
 	ProgramID = glCreateProgram();
@@ -79,4 +82,9 @@ void ShaderProgram::SetInt(const std::string & Name, int Value) const
 void ShaderProgram::SetFloat(const std::string & Name, float Value) const
 {
 	glUniform1f(glGetUniformLocation(ProgramID, Name.c_str()), Value);
+}
+
+void ShaderProgram::SetMat4(const std::string & Name, glm::mat4 Value) const
+{
+	glUniformMatrix4fv(glGetUniformLocation(ProgramID, Name.c_str()), 1, GL_FALSE, glm::value_ptr(Value));
 }

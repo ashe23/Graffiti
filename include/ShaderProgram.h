@@ -4,6 +4,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/detail/type_mat.hpp>
 
 class Shader;
 
@@ -25,4 +26,5 @@ public:
 	void SetBool(const std::string& Name, bool Value) const;
 	void SetInt(const std::string& Name, int Value) const;
 	void SetFloat(const std::string& Name, float Value) const;
-};
+	void SetMat4(const std::string& Name, glm::mat4 Value) const;
+};    
