@@ -10,6 +10,7 @@ void Core::Init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, Config::MINOR);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+
 	Window = glfwCreateWindow(Display::WIDTH, Display::HEIGHT, Config::WINDOW_TITLE, nullptr, nullptr);
 	if (!Window)
 	{
@@ -37,7 +38,12 @@ bool Core::InitializedSuccessFully() const
 void Core::ClearBuffer()
 {
 	glClearColor(0.082f, 0.317f, 0.250f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Core::InputHandler()
+{
+	//glfwSetKeyCallback(Window, )
 }
 
 bool Core::InitGlad() const

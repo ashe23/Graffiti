@@ -11,33 +11,24 @@ enum class ShaderType
 	FRAGMENT
 };
 
-enum class ShaderCompilationType
-{
-	Shader,
-	Program
-};
 
 // Shader class responsible for
-// reading vertex and fragment shader contents
-// compiling and linking to program
+// reading vertex or fragment shader contents
+// compiling and creating shader object in glfw context
 class Shader
 {
 public:
-	Shader(const char* VertexShaderPath, const char* FragmentShaderPath);
-	~Shader();
-	void Use();
-	unsigned int GetID() const;
-	void SetBool(const std::string& Name, bool Value) const;
-	void SetInt(const std::string& Name, int Value) const;
-	void SetFloat(const std::string& Name, float Value) const;
-	void SetMatrix4(const std::string& Name, glm::mat4 Value) const;
+	Shader(ShaderType Type, const char* Path);
+	bool IsValid() const;
+	// Returns Shader Object ID
+	GLuint GetID() const;
 private:
-	unsigned int ID;
-	const char* VertexShaderPath;
-	const char* FragmentShaderPath;
-	GLuint VertexShader;
-	GLuint FragmentShader;
+	ShaderType Type;
+	std::string ShaderFilePath;
+	GLuint ShaderObjectID;
+	bool bIsValid;
 private:
-	void CheckCompileError(unsigned int Shader, ShaderCompilationType Type);
-	void Compile();
+	void Init();
+	std::string ReadShaderCodeFromFile();
+	void CheckCompileError();
 };

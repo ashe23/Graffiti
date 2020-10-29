@@ -5,112 +5,71 @@
 #include "Util.h"
 
 #include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
+
 #include <glm/gtc/type_ptr.hpp>
 
 
 
-Shader::Shader(const char * VertShaderPath, const char * FragShaderPath)
+Shader::Shader(ShaderType Type, const char * Path)
 {
-	VertexShaderPath = VertShaderPath;
-	FragmentShaderPath = FragShaderPath;
+	bIsValid = false;
+	this->Type = Type;
+	ShaderFilePath = Path;
 
-	this->Compile();
+	this->Init();
 }
 
-Shader::~Shader()
+bool Shader::IsValid() const
 {
-	glDeleteProgram(ID);
+	return bIsValid;
 }
 
-void Shader::Use()
+GLuint Shader::GetID() const
 {
-	glUseProgram(ID);
+	return ShaderObjectID;
 }
 
-unsigned int Shader::GetID() const
+void Shader::Init()
 {
-	return ID;
+	// todo::ashe23 should we check file extension type for shader files?
+
+	// 1) Read Shader Code from file
+	std::string ShaderCodeStr = ReadShaderCodeFromFile();
+	const char* ShaderCode = ShaderCodeStr.c_str();
+	// 2) Create Shader Object
+	auto ShaderType = (Type == ShaderType::VERTEX) ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER;
+	ShaderObjectID = glCreateShader(ShaderType);
+	// 3) Fill Code from file to Shader Object
+	glShaderSource(ShaderObjectID, 1, &ShaderCode, nullptr);
+	// 4) Compile Shader Object
+	glCompileShader(ShaderObjectID);
+	// 5) Check for errors
+	this->CheckCompileError();
 }
 
-void Shader::SetBool(const std::string & Name, bool Value) const
+std::string Shader::ReadShaderCodeFromFile()
 {
-	glUniform1i(glGetUniformLocation(ID, Name.c_str()), static_cast<int>(Value));
+	auto RootDir = Graffiti::FileManager::GetShadersDir();
+	ShaderFilePath = RootDir + ShaderFilePath;
+
+	return Graffiti::Util::ReadFileContent(ShaderFilePath);
 }
 
-void Shader::SetInt(const std::string & Name, int Value) const
+void Shader::CheckCompileError()
 {
-	glUniform1i(glGetUniformLocation(ID, Name.c_str()), Value);
-}
+	GLint Compiled;	
+	glGetShaderiv(ShaderObjectID, GL_COMPILE_STATUS, &Compiled);
 
-void Shader::SetFloat(const std::string & Name, float Value) const
-{
-	glUniform1f(glGetUniformLocation(ID, Name.c_str()), Value);
-}
-
-void Shader::SetMatrix4(const std::string & Name, glm::mat4 Value) const
-{
-	glUniformMatrix4fv(glGetUniformLocation(ID, Name.c_str()), 1, GL_FALSE, glm::value_ptr(Value));
-}
-
-void Shader::CheckCompileError(unsigned int Shader, ShaderCompilationType Type)
-{
-	int status;
-	char InfoLog[1024];
-
-	if (Type == ShaderCompilationType::Program)
+	if (!Compiled)
 	{
-		glGetShaderiv(Shader, GL_LINK_STATUS, &status);
+		GLsizei LogLength = 0;
+		GLchar Msg[1024];
+		glGetShaderInfoLog(ShaderObjectID, 1024, &LogLength, Msg);
+		spdlog::error("Error while compiling shader {0}", Msg);
+		bIsValid = false;
+		return;
 	}
-	else
-	{
-		glGetShaderiv(Shader, GL_COMPILE_STATUS, &status);
-	}
 
-	if (!status)
-	{
-		glGetProgramInfoLog(Shader, 1024, NULL, InfoLog);
-
-		if (Type == ShaderCompilationType::Program)
-		{
-			spdlog::error("Error in shader program {0}", InfoLog);
-		}
-		else
-		{
-			spdlog::error("Error while compiling shader {0}", InfoLog);
-		}
-	}
-}
-
-void Shader::Compile()
-{
-	// read shader files content
-	auto ShadersDir = Graffiti::FileManager::GetShadersDir();
-	
-	auto VertexShaderFile = ShadersDir + VertexShaderPath;
-	auto FragmentShaderFile = ShadersDir + FragmentShaderPath;
-
-	auto VertexShaderCode = Graffiti::Util::ReadFileContent(VertexShaderFile);
-	auto FragmentShaderCode = Graffiti::Util::ReadFileContent(FragmentShaderFile);
-	const char* vsc = VertexShaderCode.c_str();
-	const char* fsc = FragmentShaderCode.c_str();
-	// Creating shader objects
-	VertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(VertexShader, 1, &vsc, NULL);
-	glCompileShader(VertexShader);
-	this->CheckCompileError(VertexShader, ShaderCompilationType::Shader);
-
-	FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(FragmentShader, 1, &fsc, NULL);
-	glCompileShader(FragmentShader);
-	this->CheckCompileError(FragmentShader, ShaderCompilationType::Shader);
-	// create shader programm and link them
-	ID = glCreateProgram();
-	glAttachShader(ID, VertexShader);
-	glAttachShader(ID, FragmentShader);
-	glLinkProgram(ID);
-	this->CheckCompileError(ID, ShaderCompilationType::Program);
-
-	// delete shaders resources
-	glDeleteShader(VertexShader);
-	glDeleteShader(FragmentShader);
+	bIsValid = true;
 }
