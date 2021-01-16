@@ -30,8 +30,8 @@ include_directories(
 	shaders/
 )
 
-# pathes
-file(GLOB SOURCES "src/*.cpp" "src/core/*.cpp")
+# paths
+file(GLOB SOURCES "src/*.cpp" "src/core/*.cpp" "src/util/*.cpp")
 file(GLOB HEADERS "include/*.h" "include/util/*.h" "include/core/*.h")
 file(GLOB SHADERS "shaders/*.vs shaders/*.fs")
 file(GLOB VENDOR_GLAD_SOURCES "vendor/glad/src/glad.c")
