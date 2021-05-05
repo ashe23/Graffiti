@@ -3,12 +3,12 @@ cmake_minimum_required(VERSION 3.18...3.20)
 project(Graffiti
 	VERSION 1.0
 	DESCRIPTION "Simple OpenGL project"
-	LANGUAGES CXX
+	LANGUAGES CXX C
 )
 
 
 # git submodules
-# if(NOT EXISTS "${PROJECT_SOURCE_DIR}/vendor/glfw/CMakeLists.txt")
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
 	find_package(Git QUIET)
 	if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 		# Update submodules as needed
@@ -23,7 +23,7 @@ project(Graffiti
 			endif()
 		endif()
 	endif()
-# endif()
+endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 	message(STATUS "64 bits")
@@ -35,30 +35,27 @@ endif()
 # compiler settings
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-if(MSVC)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif()
+set(CMAKE_CXX_EXTENSIONS OFF)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
-
-
-# # opengl
-# find_package(OpenGL REQUIRED)
 
 # glfw
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-add_subdirectory(vendor/glfw)
+# set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# add_subdirectory(external/glfw)
 
 # glad
-include_directories(vendor/glad/include)
-set(GLAD_SRC vendor/glad/src/glad.c)
+# include_directories(external/glad/include)
+# set(GLAD_SRC external/glad/src/glad.c)
 
 # spdlog
-add_subdirectory(vendor/spdlog)
+# add_subdirectory(external/spdlog)
 
 # glm
-add_subdirectory(vendor/glm)
+# add_subdirectory(external/glm)
 
-add_executable(${PROJECT_NAME} main.cpp ${GLAD_SRC})
-target_link_libraries(${PROJECT_NAME} glfw spdlog glm)
+add_subdirectory(apps)
+
+# add_executable(${PROJECT_NAME} main.cpp ${GLAD_SRC})
+# target_link_libraries(${PROJECT_NAME} glfw spdlog glm)
