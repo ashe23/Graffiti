@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-// #include "spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
 	/* Initialize the library */
 	if (!glfwInit())
 	{
-		// spdlog::error("Failed to initialize glfw");
+		spdlog::error("Failed to initialize glfw");
 		return -1;
 	}
 
@@ -18,7 +18,7 @@ int main()
 	if (!window)
 	{
 		glfwTerminate();
-		// spdlog::error("Failed to create window");
+		spdlog::error("Failed to create window");
 		return -1;
 	}
 
@@ -27,7 +27,7 @@ int main()
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		// spdlog::error("Failed to initialize glad");
+		spdlog::error("Failed to initialize glad");
 		return -1;
 	}   
 
@@ -35,8 +35,8 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
-		// glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		// glClear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);

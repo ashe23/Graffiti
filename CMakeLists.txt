@@ -19,17 +19,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
-# glfw
-# set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-# set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-# set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-# set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)
-# add_subdirectory(external/glfw)
-
-# glad
-# include_directories(external/glad/include)
-# set(GLAD_SRC external/glad/src/glad.c)
-
 # spdlog
 # add_subdirectory(external/spdlog)
 
@@ -39,5 +28,4 @@ add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_subdirectory(external)
 add_subdirectory(apps)
 
-# add_executable(${PROJECT_NAME} main.cpp ${GLAD_SRC})
 # target_link_libraries(${PROJECT_NAME} glfw spdlog glm)

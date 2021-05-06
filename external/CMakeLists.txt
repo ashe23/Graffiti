@@ -16,8 +16,16 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
 	endif()
 endif()
 
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(glfw EXCLUDE_FROM_ALL)
 
+
 # glad
-add_library(glad ${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c)
-target_include_directories(glad PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/glad/include)
+add_library(glad ${PROJECT_SOURCE_DIR}/external/glad/src/glad.c)
+target_include_directories(glad PUBLIC ${PROJECT_SOURCE_DIR}/external/glad/include)
+
+# spdlog
+add_subdirectory(spdlog EXCLUDE_FROM_ALL)
